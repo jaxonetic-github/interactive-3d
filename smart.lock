@@ -1,0 +1,15 @@
+{
+  "meteor": {},
+  "dependencies": {
+    "basePackages": {
+      "ogv-threejs": {}
+    },
+    "packages": {
+      "ogv-threejs": {
+        "git": "https://github.com/inderpreetsingh/meteor-threejs-ogv",
+        "tag": "v1.0.0",
+        "commit": "076295aee895e03c06a931eb56c8493924e10333"
+      }
+    }
+  }
+}
