@@ -1,15 +1,10 @@
 The Interactive 
 =======
 
-A 3D interactive experience with powered by Meteor and ‪Threejs‬
+A 3D interactive experience powered by Meteor and ‪Threejs‬
 
-Config
 --------
-You must add jquery and you should add css (bootstrap or your own)
->>meteor add jquery
-
-Demo coming soon...
-### [Demo]
+### [Demo](http://interactive3d.meteor.com/)
 
 Links
 --------
