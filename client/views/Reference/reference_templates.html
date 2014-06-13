@@ -1,0 +1,52 @@
+
+<template name="reference">
+		<div class="row">
+
+		<div class="container">
+	
+	<form id="reference-form" class="form-horizontal" role="form">
+		
+  <div class="form-group">
+    <label for="reference-title " class="col-sm-2 control-label">Title</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="reference-title" placeholder="Post Title">
+    </div>
+  </div>
+   <div class="form-group">
+    <label for="reference-url " class="col-sm-2 control-label">Url</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="reference-title" placeholder="Post Title">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="reference-description" class="col-sm-2 control-label">Description</label>
+    <div class="col-sm-10">
+      <textarea id="reference-description" class="form-control" rows="3"></textarea>
+    </div>
+  </div>
+  		  <div class="form-group">
+		  		<label class="col-sm-2 control-label"></label>
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default">Submit Post</button>
+    </div>
+  </div>
+
+
+</form>
+</div>
+</div>
+
+	
+</template>
+
+<template name="listReferences">
+			<div class="container">
+	<div class="row">
+	{{#each blogs}}
+		<h3>{{title}}</h3>
+		<h5>{{url}}</h5>
+		<p>{{description}}</p>
+	{{/each}}
+	</div>
+</div>
+</template>

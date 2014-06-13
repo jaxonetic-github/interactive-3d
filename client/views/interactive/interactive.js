@@ -2,6 +2,40 @@
 
 Template.interactive.rendered = function(){
 
+	navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+	window.URL = window.URL || window.webkitURL;
+	
+	var camvideo = document.getElementById('monitor');
+	
+	    if (!navigator.getUserMedia) 
+	    {
+	        document.getElementById('messageError').innerHTML = 
+	            'Sorry. <code>navigator.getUserMedia()</code> is not available.';
+	    }
+	    navigator.getUserMedia({video: true}, gotStream, noStream);
+	
+	function gotStream(stream) 
+	{
+	    if (window.URL) 
+	    {   camvideo.src = window.URL.createObjectURL(stream);   } 
+	    else // Opera
+	    {   camvideo.src = stream;   }
+	
+	    camvideo.onerror = function(e) 
+	    {   stream.stop();   };
+	
+	    stream.onended = noStream;
+	}
+	
+	function noStream(e) 
+	{
+	    var msg = 'No camera available.';
+	    if (e.code == 1) 
+	    {   msg = 'User denied access to use camera.';   }
+	    document.getElementById('errorMessage').textContent = msg;
+	}
+
+
 /*
 	Three.js "tutorials by example"
 	Author: Lee Stemkoski
@@ -16,6 +50,7 @@ Template.interactive.rendered = function(){
  * 
  */
 
+	
 // assign global variables to HTML elements
 var video = document.getElementById( 'monitor' );
 var videoTexture;
@@ -69,6 +104,7 @@ buttons.push( buttonData3 );
     var GRID_DOT_SIZE= .2;
 // standard global variables
 var container,camera, rendererCSS, controls, stats;
+
 var clock = new THREE.Clock();
 var iFrameTargetList = [],sceneTargetList=[], graphPlaneTargetList=[], reOrientTargetList=[];
 
@@ -86,7 +122,7 @@ var projector;
 // SKYBOX/FOG textures
 var imagePrefix = "images/dawnmountain-";
 var directions  = ["xpos", "xneg", "ypos", "yneg", "zpos", "zneg"];
-var imageSuffix = ".png";
+var uffix = ".png";
 var brickImage = "images/brick.png";
 var waterTextureImage = "images/textures/water.jpg";
 //
@@ -201,7 +237,7 @@ function init()
 	
 	initRenderers();
  	controls = new THREE.OrbitControls( camera, renderer.domElement );
-	controls.center = SCENE_CONTAINER_INITIAL_POSITION;
+	controls.target = SCENE_CONTAINER_INITIAL_POSITION;
 	controls.maxDistance =10000;
 	
 	browsingSceneContainer =createInternetBrowsingScene();
@@ -286,8 +322,12 @@ function cameraMoveToTween(camPosition, targetObject){
        
        
 	}).onComplete(function(){
-		controls.center = camPosition;
-	
+		controls.target = camPosition;
+		//controls.minDistance=500;
+		//controls.maxDistance=600;
+		console.log("camera moved to...");
+		console.log(camera.position);
+		// targetObject.lookAt(camera.position);
 	});
 	
 	moveTween.start();
@@ -299,7 +339,9 @@ function cameraFocusOnBrowsingAndWebcamSceneTween(){
 	
     var cameraPosition = { x : camera.position.x, y:camera.position.y, z:camera.position.z, rx:camera.rotation.x, ry:camera.rotation.y,rz:camera.rotation.z};
     var cameraTargetPosition = { x : cameraFocusOnBrowsingAndWebcamScenesPosition.x, y:cameraFocusOnBrowsingAndWebcamScenesPosition.y, z:cameraFocusOnBrowsingAndWebcamScenesPosition.z , rx:0, ry:0,rz:0};
-
+  		console.log(cameraPosition);
+			console.log(cameraTargetPosition); 
+   
     var viewBrowsingAndWebcamSceneTween	= new TWEEN.Tween(cameraPosition);
 		viewBrowsingAndWebcamSceneTween.to(cameraTargetPosition, 5000)
 		.delay(1000)
@@ -312,7 +354,9 @@ function cameraFocusOnBrowsingAndWebcamSceneTween(){
 	
         camera.lookAt(cameraFocusOnBrowsingAndWebcamScenesCenter);
 	}).onComplete(function(){
-		controls.center = cameraFocusOnBrowsingAndWebcamScenesCenter;
+		controls.target = cameraFocusOnBrowsingAndWebcamScenesCenter;
+		console.log("camera moved to...");
+		console.log(camera.position);
 	});
 	
 	viewBrowsingAndWebcamSceneTween.start();
@@ -322,8 +366,10 @@ function cameraFocusOnWebcamSceneTween(){
 	
     var cameraPosition = { x : camera.position.x, y:camera.position.y, z:camera.position.z, rx:camera.rotation.x, ry:camera.rotation.y,rz:camera.rotation.z};
     var cameraTargetPosition = { x : cameraFocusOnWebcamScenePosition.x, y:cameraFocusOnWebcamScenePosition.y, z:cameraFocusOnWebcamScenePosition.z , rx:0, ry:0,rz:0};
+  		console.log(cameraPosition);
+			console.log(cameraTargetPosition); 
+   
     var toWebcamSceneTween	= new TWEEN.Tween(cameraPosition);
-
 		toWebcamSceneTween.to(cameraTargetPosition, 5000)
 		.delay(1000)
 		.easing(TWEEN.Easing.Linear.None)
@@ -335,7 +381,7 @@ function cameraFocusOnWebcamSceneTween(){
 	
         camera.lookAt(webcamSceneCenter);
 	}).onComplete(function(){
-		controls.center = webcamSceneCenter;
+		controls.target = webcamSceneCenter;
 		console.log("camera moved to...");
 		console.log(camera.position);
 	});
@@ -362,7 +408,7 @@ function cameraFocusOnBrowsingSceneTween(){
 	
         camera.lookAt(browsingSceneCenter);
 	}).onComplete(function(){
-		controls.center = browsingSceneCenter;
+		controls.target = browsingSceneCenter;
 		console.log("camera moved to...");
 		console.log(camera.position);
 	});
@@ -666,9 +712,12 @@ graphingTextContainer = new THREE.Object3D();
 	   ////////////
 	// camcube //
 	////////////
-		var boxGeometry = new THREE.BoxGeometry( 500, 500, 500 );
-	this.cubeMaterial = new THREE.MeshLambertMaterial( { color: 0xffffff, map: redTexture, emissive: 0x333333 } );
-	webcamCube = new THREE.Mesh( boxGeometry, cubeMaterial );
+	this.colorRed = THREE.ImageUtils.loadTexture( "images/textures/SquareRed.png" );
+	this.colorGreen = THREE.ImageUtils.loadTexture( "images/textures/SquareGreen.png" );
+	this.colorBlue = THREE.ImageUtils.loadTexture( "images/textures/SquareBlue.png" );
+	var cubeGeometry = new THREE.CubeGeometry( 500, 500, 500 );
+	this.cubeMaterial = new THREE.MeshLambertMaterial( { color: 0xffffff, map: colorRed, emissive: 0x333333 } );
+	webcamCube = new THREE.Mesh( cubeGeometry, cubeMaterial );
 	webcamCube.position.y = webcamPlatformPosition.y+600;
 	//cube.rotation.set(Math.PI / 4, 0, 0);
 	
@@ -768,7 +817,7 @@ graphingTextContainer = new THREE.Object3D();
 	var materialArray = [];
 	for (var i = 0; i < 6; i++)
 			materialArray.push( new THREE.MeshBasicMaterial({
-				map: THREE.ImageUtils.loadTexture( imagePrefix + directions[i] + imageSuffix  ),
+				map: THREE.ImageUtils.loadTexture( imagePrefix + directions[i] + uffix  ),
 				side: THREE.DoubleSide
 			}));
 	var skyMaterial = new THREE.MeshFaceMaterial( materialArray );
@@ -796,7 +845,7 @@ graphingTextContainer = new THREE.Object3D();
 
 	 //Writing on the back wall
 	  phraseRotation.set(-1*Math.PI/10,2*(-0),0);
-	  
+	  console.log(phraseRotation);
 	  welcomeTxt = sayAt("Welcome to my playground.  ",
 	  browsingSceneCenter.x,browsingSceneCenter.y+250,0,
 	  phraseRotation, 0x666006,30,11); 	  
@@ -826,9 +875,15 @@ graphingTextContainer = new THREE.Object3D();
 	 planeMesh= new THREE.Mesh( planeGeometry, frontPlaneMaterial );
 	 scene.add(planeMesh);
 	 reOrientTargetList.push(planeMesh);
-	
+	//planeMesh.overdraw = true;
+	//graphPlaneTargetList.push(planeMesh);
+	//planeMesh.position.fromArray( browserCubePos[ 5 ]);
 	planeMesh.rotation.fromArray( cubeRot[ xyPlaneToZpos ] );
-	
+	//planeMesh.rotation.y = Math.PI/7;
+	//planeMesh.rotation.z = Math.PI;
+	console.log(planeMesh.position);
+	//planeMesh.position.x+=15;
+	// add it to the standard (WebGL) scene
 	planeMesh.name = "jax2d";
 	scene.add(planeMesh);
 
@@ -984,7 +1039,7 @@ function getTextContainerBackgroundMesh(textContainer,containerPosition, planeWi
 }
 
 function setupBrowsingControlLimits(browsingCenter){
-/*	controls.center = SCENE_CONTAINER_INITIAL_POSITION;
+/*	controls.target = SCENE_CONTAINER_INITIAL_POSITION;
 	controls.minDistance = 900;
 	controls.maxDistance = 3000;
 	controls.maxPolarAngle = Math.PI/2;
@@ -1059,7 +1114,7 @@ function blend()
 	if (!lastImageData) lastImageData = videoContext.getImageData(0, 0, width, height);
 	// create a ImageData instance to receive the blended result
 	var blendedData = videoContext.createImageData(width, height);
-	// blend the 2 images
+	// blend the 2 
 	differenceAccuracy(blendedData.data, sourceData.data, lastImageData.data);
 	// draw the result in a canvas
 	blendContext.putImageData(blendedData, 0, 0);
@@ -1114,11 +1169,11 @@ function checkAreas()
 		{
 			console.log( "Button " + buttons[b].name + " triggered." ); // do stuff
 			if (buttons[b].name == "red")
-				cubeMaterial.map = colorRed;
+				cubeMaterial.map = redTexture;
 			if (buttons[b].name == "green")
-				cubeMaterial.map = colorGreen;
+				cubeMaterial.map = greenTexture;
 			if (buttons[b].name == "blue")
-				cubeMaterial.map = colorBlue;
+				cubeMaterial.map = blueTexture;
 			// messageArea.innerHTML = "Button " + buttons[b].name + " triggered.";
 			//messageArea.innerHTML = "<font size='+4' color=" + buttons[b].name + "><b>Button " + buttons[b].name + " triggered.</b></font>";
 		}
@@ -1148,7 +1203,7 @@ function addSphere(radius, geometryY, geometryZ,positionX, positionY, positionZ,
 	//console.log(positionX+" "+positionY +" "+ positionZ);
 	var sphereGeom = new THREE.SphereGeometry(radius, geometryY, geometryZ);
     
-	var moonTexture = THREE.ImageUtils.loadTexture( '/sprites/ball.png' );
+	var moonTexture = THREE.ImageUtils.loadTexture( 'images/textures/sprites/ball.png' );
 	var moonMaterial = new THREE.MeshBasicMaterial( { map: moonTexture } );
     var moon = new THREE.Mesh(sphereGeom, moonMaterial);
 	moon.position.set(positionX.toFixed(2), positionY.toFixed(2), positionZ.toFixed(2));
@@ -1480,9 +1535,9 @@ function onDocumentMouseMove(event) {
 	graphOriginPosition.z+=DFLT_CUBE_SIZE/2;
 	graphOriginPosition.x-=100;
 	showXYGrid(scene,graphOriginPosition, 100);
-	//controls.center = graphOriginPosition;
-	//controls.center.x+=0;
-	//controls.center.z-= 5;
+	//controls.target = graphOriginPosition;
+	//controls.target.x+=0;
+	//controls.target.z-= 5;
 	
 	//setup clickable pane 
 	var planeMaterial   = new THREE.MeshBasicMaterial({color: 0xffffff });
@@ -1536,7 +1591,7 @@ function onDocumentMouseMove(event) {
 
 				//
                 
-              controls.center = SCENE_CONTAINER_INITIAL_POSITION;// adjustOrientationIntersects[ 0 ].point;
+              controls.target = SCENE_CONTAINER_INITIAL_POSITION;// adjustOrientationIntersects[ 0 ].point;
              //  controls.minDistance = 700;
             //  controls.maxDistance = 3000;
               console.log(adjustOrientationIntersects[ 0 ].point);
@@ -1546,7 +1601,7 @@ function onDocumentMouseMove(event) {
 			if (graphPlaneIntersects.length > 0){
 				console.log("Graph Intersect");
 				var pos = graphPlaneIntersects[0].point;
-				var points = [];
+var points = [];
                 var origin = raycaster.ray.origin.clone();
                 //console.log(origin);
                 //	var distance = -camera.position.z / direction.z;
@@ -1588,8 +1643,8 @@ console.log(centroid);
 //frameCenterPosition.y=centroid.y;
 
 			 cameraMoveToTween(frameCenterPosition, iFrameTargetInterects[0].object);
-              //controls.center = frameCenterPosition;
-              //scene.add(addSphere(10, 32, 16,controls.center.x,controls.center.y,controls.center.z, true));
+              //controls.target = frameCenterPosition;
+              //scene.add(addSphere(10, 32, 16,controls.target.x,controls.target.y,controls.target.z, true));
               //controls.minDistance = 0;
               //controls.maxDistance = 600;
              
@@ -1610,4 +1665,5 @@ console.log(centroid);
         }
         
    
+
 }

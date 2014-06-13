@@ -38490,6 +38490,7 @@ THREE.ShaderFlares = {
 	}
 
 };
-window.THREE = THREE;
+
+
 root.THREE = THREE
 })(this);
