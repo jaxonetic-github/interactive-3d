@@ -1,1 +1,516 @@
-/* CSS declarations go here */
+/* line 6, ../scss/interactive.scss */
+iframe {
+  zoom: 1;
+  filter: alpha(opacity=90);
+  opacity: 0.9;
+  border: none;
+}
+
+/* line 7, ../scss/interactive.scss */
+iframe:hover {
+  border: 2px solid sienna;
+}
+
+/* line 8, ../scss/interactive.scss */
+#bottom-content {
+  margin-top: 150px;
+}
+
+/* line 10, ../scss/interactive.scss */
+.margined-paragraph {
+  margin-bottom: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 66%;
+}
+
+/* line 15, ../scss/interactive.scss */
+.left-margined-paragraph {
+  margin-bottom: 30px;
+  margin-left: 25px;
+  margin-right: 25px;
+}
+
+/* line 20, ../scss/interactive.scss */
+.carousel-inner {
+  text-align: center;
+}
+
+/* line 25, ../scss/interactive.scss */
+#flashMessages {
+  color: #008080;
+  font-size: 22px;
+}
+
+/* line 28, ../scss/interactive.scss */
+.uppercased {
+  text-transform: uppercase;
+}
+
+/* line 29, ../scss/interactive.scss */
+.capitalized {
+  text-transform: capitalize;
+}
+
+/* line 30, ../scss/interactive.scss */
+.active-mainnav-item, .active {
+  background-color: rgba(210, 210, 210, 0.8);
+}
+
+/* line 31, ../scss/interactive.scss */
+.jax-img-responsive {
+  display: block;
+  height: auto;
+  width: 55%;
+  margin: auto;
+}
+
+/* line 34, ../scss/interactive.scss */
+.jax-project-img-responsive {
+  display: block;
+  height: auto;
+  width: 110%;
+  margin: auto;
+}
+
+/* line 38, ../scss/interactive.scss */
+.jax-center-aligned {
+  text-align: center;
+}
+
+/* line 39, ../scss/interactive.scss */
+a {
+  color: #295377;
+}
+
+/* line 40, ../scss/interactive.scss */
+h3 {
+  color: darkslategray;
+}
+
+/* line 41, ../scss/interactive.scss */
+h4 {
+  color: sienna;
+}
+
+/* line 45, ../scss/interactive.scss */
+.row {
+  margin-top: 60px;
+}
+
+/* line 47, ../scss/interactive.scss */
+.navbar-default {
+  background-color: transparent;
+  border: none;
+}
+
+/* line 51, ../scss/interactive.scss */
+.navbar-toggle {
+  float: none;
+}
+
+@media (min-width: 960px) and (max-width: 1099px) {
+  /* line 54, ../scss/interactive.scss */
+  .jax-innerpage-pane {
+    width: 64%;
+  }
+}
+@media (min-width: 768px) {
+  /* line 61, ../scss/interactive.scss */
+  .jax-innerpage-pane {
+    margin-left: 25px;
+  }
+}
+@media (max-width: 640px) {
+  /* line 64, ../scss/interactive.scss */
+  .jax-innerpage-centerpane3 {
+    width: 20%;
+  }
+
+  /* line 65, ../scss/interactive.scss */
+  .navbar-fixed-top, .navbar-fixed-bottom {
+    width: 100%;
+  }
+
+  /* line 69, ../scss/interactive.scss */
+  .navbar-inverse {
+    width: 100%;
+    border-color: #080808;
+  }
+}
+@media (max-width: 768px) {
+  /* line 80, ../scss/interactive.scss */
+  .navbar-fixed-top, .navbar-fixed-bottom {
+    right: auto;
+    width: 100%;
+  }
+
+  /* line 84, ../scss/interactive.scss */
+  .navbar-toggle {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  /* line 85, ../scss/interactive.scss */
+  .jax-innerpage-pane {
+    width: 79%;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+@media (min-width: 768px) and (max-width: 960px) {
+  /* line 88, ../scss/interactive.scss */
+  .navbar-inverse {
+    background-color: #222222;
+    border-color: #080808;
+    margin-left: 0;
+    min-width: 250px;
+    width: 60%;
+  }
+
+  /* line 89, ../scss/interactive.scss */
+  .navbar-fixed-top, .navbar-fixed-bottom {
+    right: 0;
+  }
+
+  /* line 90, ../scss/interactive.scss */
+  .nav {
+    width: 100%;
+  }
+
+  /* line 91, ../scss/interactive.scss */
+  .jax-innerpage-pane {
+    width: 66%;
+  }
+}
+@media (min-width: 1100px) {
+  /* line 96, ../scss/interactive.scss */
+  .jax-innerpage-pane {
+    width: 56%;
+    margin-left: 4%;
+    border: 3px inset #ababb9;
+    border-radius: 20px;
+  }
+}
+@media (min-width: 1400px) {
+  /* line 102, ../scss/interactive.scss */
+  .jax-innerpage-pane {
+    width: 56%;
+    margin-left: 4%;
+  }
+}
+@media (max-width: 1600px) {
+  /* line 105, ../scss/interactive.scss */
+  .background-2d {
+    background-size: inherit;
+  }
+}
+@media (min-width: 1600px) {
+  /* line 110, ../scss/interactive.scss */
+  .background-2d {
+    background-size: cover;
+  }
+}
+/* line 113, ../scss/interactive.scss */
+html {
+  height: 100%;
+}
+
+/* line 118, ../scss/interactive.scss */
+.background-2d {
+  position: absolute;
+  margin-top: 0 !important;
+  background-color: black;
+  background-image: url("img/me.png");
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+
+/* line 119, ../scss/interactive.scss */
+body {
+  margin: 0;
+  color: #251313;
+  padding: 0;
+  font-size: 16px;
+  background-size: cover;
+  background-position: center top;
+  background-position: top;
+  background-repeat: no-repeat;
+  height: 100%;
+}
+/* line 121, ../scss/interactive.scss */
+body #home-topnav .navbar-inverse {
+  width: 100%;
+}
+/* line 124, ../scss/interactive.scss */
+body .home-banner {
+  width: 365px;
+  display: block;
+  margin: auto;
+}
+/* line 125, ../scss/interactive.scss */
+body .home-banner li {
+  vertical-align: middle;
+}
+/* line 126, ../scss/interactive.scss */
+body .home-banner li img {
+  vertical-align: baseline;
+  margin-left: -150px;
+}
+/* line 130, ../scss/interactive.scss */
+body #wrapper {
+  padding-top: 70px;
+  height: 100%;
+}
+/* line 133, ../scss/interactive.scss */
+body #wrapper #content {
+  height: 300px;
+}
+/* line 135, ../scss/interactive.scss */
+body #wrapper #content #home-pane {
+  width: 300px;
+}
+/* line 151, ../scss/interactive.scss */
+body footer {
+  text-align: center;
+}
+
+/* line 156, ../scss/interactive.scss */
+.jax-innerpage-pane {
+  min-width: 500px;
+  background-color: rgba(212, 200, 175, 0.7);
+  margin-top: 60px;
+  border-radius: 20px;
+  border: 2px inset sienna;
+  padding: 15px;
+}
+/* line 158, ../scss/interactive.scss */
+.jax-innerpage-pane h3 {
+  color: sienna;
+}
+/* line 159, ../scss/interactive.scss */
+.jax-innerpage-pane iframe {
+  padding-bottom: 25px;
+}
+
+/* line 161, ../scss/interactive.scss */
+.jax-innerpage-centerpane {
+  width: 400px;
+  background-color: rgba(212, 200, 175, 0.7);
+  display: block;
+  margin: auto;
+  border-radius: 20px;
+  border: 2px inset sienna;
+  padding: 15px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* line 165, ../scss/interactive.scss */
+.jax-innerpage-centerpane2 {
+  text-align: center;
+  width: 350px;
+  background-color: rgba(212, 200, 175, 0.7);
+  display: block;
+  margin: auto;
+  border-radius: 20px;
+  border: 2px inset sienna;
+  padding: 15px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* line 170, ../scss/interactive.scss */
+.jax-innerpage-centerpane3 {
+  min-width: 100px;
+  width: 15%;
+  background-color: rgba(212, 200, 175, 0.7);
+  display: block;
+  margin: auto;
+  border-radius: 20px;
+  border: 2px inset sienna;
+  padding: 15px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* line 175, ../scss/interactive.scss */
+.btn-primary {
+  background-color: sienna;
+}
+
+/* line 176, ../scss/interactive.scss */
+.modal-content {
+  position: relative;
+  background-color: rgba(212, 200, 175, 0.7);
+}
+
+/* line 183, ../scss/interactive.scss */
+.modal-header {
+  background-color: darkslategray;
+  border-radius: 10px 10px 0 0;
+  border-bottom: none;
+}
+
+/* line 186, ../scss/interactive.scss */
+.jax-project-topnav {
+  margin-top: 10px;
+}
+
+/* line 189, ../scss/interactive.scss */
+.jax-project-topnav, .jaxtopnav {
+  margin-top: 100px;
+}
+/* line 190, ../scss/interactive.scss */
+.jax-project-topnav .dropdown-menu, .jaxtopnav .dropdown-menu {
+  margin-top: -1px;
+  background-color: lightslategrey;
+}
+/* line 191, ../scss/interactive.scss */
+.jax-project-topnav .jax-dropdownmenulevelone-active, .jaxtopnav .jax-dropdownmenulevelone-active {
+  background-color: #EEEEEE;
+}
+
+/* line 196, ../scss/interactive.scss */
+.jax-menuitem a {
+  font-family: fantasy;
+  font-size: 25px;
+  color: sienna;
+}
+
+/* line 198, ../scss/interactive.scss */
+.jax-iiid-menu {
+  background-color: transparent;
+}
+
+/* line 199, ../scss/interactive.scss */
+.canvas-container {
+  z-index: 0;
+  position: absolute;
+  top: 0;
+}
+/* line 200, ../scss/interactive.scss */
+.canvas-container #threeCanvas {
+  z-index: 0;
+  position: absolute;
+  width: 100%;
+}
+/* line 202, ../scss/interactive.scss */
+.canvas-container #threeCanvas canvas {
+  position: relative;
+}
+
+/* line 209, ../scss/interactive.scss */
+#resume {
+  background-color: rgba(212, 200, 175, 0.7);
+  margin: 0;
+  color: #251313;
+}
+/* line 210, ../scss/interactive.scss */
+#resume h3, #resume h4 {
+  display: block;
+  margin: auto;
+}
+/* line 211, ../scss/interactive.scss */
+#resume .section {
+  padding: 10px 25px 25px 25px;
+}
+/* line 212, ../scss/interactive.scss */
+#resume dt {
+  color: sienna;
+}
+/* line 213, ../scss/interactive.scss */
+#resume dd {
+  margin-left: 25px;
+}
+
+/* line 218, ../scss/interactive.scss */
+#home {
+  margin: 25px;
+}
+
+/* line 222, ../scss/interactive.scss */
+.contact-form {
+  width: 60%;
+}
+/* line 223, ../scss/interactive.scss */
+.contact-form label {
+  float: left;
+  color: sienna;
+}
+/* line 224, ../scss/interactive.scss */
+.contact-form input {
+  width: 100%;
+}
+/* line 225, ../scss/interactive.scss */
+.contact-form textarea {
+  width: 100%;
+}
+/* line 226, ../scss/interactive.scss */
+.contact-form .submit {
+  width: 25%;
+}
+
+/* line 231, ../scss/interactive.scss */
+#tres-d-topnav {
+  z-index: 9000;
+  position: absolute;
+  width: 100%;
+}
+/* line 232, ../scss/interactive.scss */
+#tres-d-topnav .nav {
+  width: inherit;
+}
+/* line 233, ../scss/interactive.scss */
+#tres-d-topnav .nav a {
+  color: #B8C8D6;
+  text-align: right;
+}
+/* line 234, ../scss/interactive.scss */
+#tres-d-topnav .nav .menu-toggle {
+  position: relative;
+  float: right;
+  display: block;
+  padding: 9px 10px;
+  /* margin-top: 8px; */
+  /* margin-right: 15px; */
+  margin-bottom: 8px;
+  /* background-color: transparent; */
+  background-image: none;
+  border: 1px solid rgba(155, 43, 43, 0.8);
+  border-radius: 4px;
+}
+
+/* line 243, ../scss/interactive.scss */
+.threeD-body {
+  background-color: transparent !important;
+}
+
+/* line 244, ../scss/interactive.scss */
+.threeD-content {
+  position: absolute;
+  top: 0;
+}
+/* line 245, ../scss/interactive.scss */
+.threeD-content .jax-innerpage-pane {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  border-radius: 20px;
+  min-width: 500px;
+  background-color: rgba(212, 200, 175, 0.7);
+  margin-top: 10px;
+  border: 2px inset sienna;
+  padding: 15px;
+}
+/* line 247, ../scss/interactive.scss */
+.threeD-content .jax-innerpage-pane h3 {
+  color: sienna;
+}
+
+/* line 250, ../scss/interactive.scss */
+#canvasLayers {
+  z-index: -10;
+}

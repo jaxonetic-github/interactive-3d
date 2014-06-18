@@ -1,0 +1,30 @@
+<template name="chat_input">
+	<form id="chatpost-form" class="form-horizontal" role="form">
+	<div class="well well-large">
+		<label for="posttext">posttext</label>
+		<input class="input-xxlarge posttext" type="text" name="posttext" value="" id="posttext">
+	</div>
+	  		  <div class="form-group">
+		  		<label class="col-sm-2 control-label"></label>
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default">Submit Post</button>
+    </div>
+  </div>
+</form>
+</template>
+
+<template name="chat_history">
+	{{#each chat_posts}}
+	<div class="media">
+		<a class="pull-left" href="#"> <img class="media-object" src="" alt="..."> </a>
+		<div class="media-body">
+			<h4 class="media-heading">{{date}}</h4>
+			{{chatText}}
+		</div>
+	</div>
+	{{/each}}
+	<ul class="pager">
+		<li class="previous"><a href="#">&larr; Previous</a></li>
+		<li class="next"><a href="#">&larr; Next</a></li>
+	</ul>
+</template>
