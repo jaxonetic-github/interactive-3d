@@ -14,7 +14,7 @@
 </template>
 
 <template name="chat_history">
-	{{#each chat_posts}}
+	{{#each chatHistory}}
 	<div class="media">
 		<a class="pull-left" href="#"> <img class="media-object" src="" alt="..."> </a>
 		<div class="media-body">
@@ -24,7 +24,7 @@
 	</div>
 	{{/each}}
 	<ul class="pager">
-		<li class="previous"><a href="#">&larr; Previous</a></li>
-		<li class="next"><a href="#">&larr; Next</a></li>
+		<li class="previous"><a href="#">&larr; {{previousText}}</a></li>
+		<li class="next"><a href="#">&rarr; {{nextText}}</a></li>
 	</ul>
 </template>
